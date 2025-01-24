@@ -7,8 +7,11 @@ export const BookingForm = ({
   setSelectedDate,
   selectedTime,
   setSelectedTime,
+  selectedService,
+  setSelectedService,
   availableSlots,
   handleSubmit,
+  hairdresserServices,
 }) => {
   const today = new Date().toISOString().split("T")[0];
 
@@ -39,6 +42,23 @@ export const BookingForm = ({
             />
           </Form.Group>
           <Form.Group className="mb-3">
+            <Form.Label>Szolgáltatás</Form.Label>
+            <Form.Select
+              required
+              value={selectedService}
+              onChange={(e) => setSelectedService(e.target.value)}
+            >
+              <option value="">Válassz szolgáltatást...</option>
+              {hairdresserServices.map((service, index) => (
+                <option key={index} value={service}>
+                  {service}
+                </option>
+              ))}
+            </Form.Select>
+          </Form.Group>
+        </Col>
+        <Col md={6}>
+          <Form.Group className="mb-3">
             <Form.Label>Válassz dátumot</Form.Label>
             <Form.Control
               type="date"
@@ -48,8 +68,6 @@ export const BookingForm = ({
               required
             />
           </Form.Group>
-        </Col>
-        <Col md={6}>
           <Form.Group className="mb-3">
             <Form.Label>Válassz időpontot</Form.Label>
             <div className="d-flex flex-wrap gap-2">
@@ -77,7 +95,11 @@ export const BookingForm = ({
       </Row>
       <Row>
         <Col className="text-center mt-3">
-          <Button variant="success" type="submit" disabled={!selectedTime}>
+          <Button
+            variant="success"
+            type="submit"
+            disabled={!selectedTime || !selectedService}
+          >
             Lefoglalom
           </Button>
         </Col>

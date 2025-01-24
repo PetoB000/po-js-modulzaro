@@ -27,7 +27,7 @@ export default function BookingModal({ show, handleClose, hairdresser }) {
         <Modal.Title>Időpontfoglalás - {hairdresser.name}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <BookingForm {...bookingProps} />
+        <BookingForm {...bookingProps} hairdresserServices={hairdresser.services} />
       </Modal.Body>
     </Modal>
   );

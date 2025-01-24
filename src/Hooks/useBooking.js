@@ -13,6 +13,7 @@ export const useBooking = (
     new Date().toISOString().split("T")[0]
   );
   const [selectedTime, setSelectedTime] = useState(null);
+  const [selectedService, setSelectedService] = useState("");
   const [userData, setUserData] = useState({
     name: "",
     phone: "",
@@ -33,7 +34,7 @@ export const useBooking = (
       customer_name: userData.name,
       customer_phone: userData.phone,
       appointment_date: `${selectedDate} ${selectedTime}:00`,
-      service: hairdresser.services[0],
+      service: selectedService,
     };
 
     try {
@@ -66,6 +67,8 @@ export const useBooking = (
     setSelectedDate,
     selectedTime,
     setSelectedTime,
+    selectedService,
+    setSelectedService,
     userData,
     setUserData,
     availableSlots,
